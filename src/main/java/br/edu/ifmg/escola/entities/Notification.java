@@ -7,8 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import org.hibernate.boot.model.source.spi.FetchCharacteristics;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,26 +17,18 @@ import java.util.List;
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
-@Table(name = "tb_resource")
-public class Resource {
+@Table(name = "tb_notification")
+public class Notification {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private Long id;
-    private String title;
-    private String description;
-    private Integer position;
-    private String imgUri;
-    @Enumerated(EnumType.STRING)
-    private ResourceType type;
-    private String externalLink;
-
+    private String text;
+    private Instant moment;
+    private String route;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "offer_id")
-    private Offer offer;
-
-    @OneToMany(mappedBy = "resource")
-    List<Section> sections = new ArrayList<>();
+    @JoinColumn(name = "user_id")
+    private User user;
 
 }
