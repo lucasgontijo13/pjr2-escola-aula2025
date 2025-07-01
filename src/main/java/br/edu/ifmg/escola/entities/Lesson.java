@@ -8,7 +8,9 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.hibernate.boot.model.source.spi.FetchCharacteristics;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -39,4 +41,8 @@ public abstract class Lesson {
                     @JoinColumn(name = "offer_id")
             })
     private Set<Enrollment> enrollmentsDone = new HashSet<>();
+
+
+    @OneToMany(mappedBy = "lesson")
+    private List<Deliver> deliveries = new ArrayList<>();
 }

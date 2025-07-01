@@ -7,7 +7,9 @@ import lombok.*;
 import org.hibernate.grammars.hql.HqlParser;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -26,6 +28,9 @@ public class Enrollment {
 
     @ManyToMany(fetch = FetchType.LAZY)
     private Set<Lesson> lessonsDone = new HashSet<>();
+
+    @OneToMany(mappedBy = "enrollment")
+    private List<Deliver> deliveries = new ArrayList<>();
 
     public User getUser() {return id.getUser();}
     public void setUser(User user) {id.setUser(user);}
